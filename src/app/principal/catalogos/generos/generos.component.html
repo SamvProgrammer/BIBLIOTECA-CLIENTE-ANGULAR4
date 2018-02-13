@@ -1,3 +1,80 @@
-<p>
-  generos works!
-</p>
+<div class="row text-center">
+   
+  <div class="col">
+      <p style="font-size: 30px" >Cátalogo de generos</p>
+  </div>
+</div>
+<div class="row">
+  <div class="col text-right">
+      <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal" (click)="tituloModal('Agregar registro',true)"><i class="fa fa-plus"></i></button>
+  </div>
+</div>
+<div class="row">
+   <div class="col">
+     <table class="table table-striped">
+       <thead>
+        <tr>
+            <th>#</th>
+            <th>Genero</th>
+            <th>Opciones</th>
+        </tr>
+       </thead>
+       <tbody>
+         
+         <tr *ngFor = "let item of generos">
+             <td scope="row">{{item.id}}</td>
+             <td>{{item.genero}}</td>
+             <td>
+                <button class="btn btn-default" data-toggle="modal" data-target="#myModal" (click)="tituloModal('Actualizar registro',false);obtenerRegistro(item.id);"> <i class="fa fa-refresh"></i></button>
+                <button class="btn btn-danger" (click)="eliminar(item.id);"> <i class="fa fa-remove"></i></button>
+             </td>
+         </tr>
+
+       </tbody>
+     </table>
+     <div *ngIf="!generos" class="alert alert-danger text-center" role="alert">
+      <strong></strong> Sin registros en las tablas
+    </div>
+   </div>
+</div>
+
+
+<!-- The Modal -->
+<div class="modal fade" id="myModal">
+  <div class="modal-dialog">
+    <form [formGroup]="miFormulario" (ngSubmit)="enviar()">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">{{titulo}}</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+          <div class="col">
+              <div class="form-area">  
+                  <br style="clear:both">
+                              
+                      <div class="form-group">
+                          <label>GENERO:</label>
+                      <input  formControlName="genero" type="text" class="form-control text-uppercase" id="genero" [(ngModel)] = "genero" placeholder="Ingresar genero">
+                    </div>
+                    
+                  </div>
+          </div>
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button [disabled]="!miFormulario.valid" type="submit" *ngIf="mostrarBoton == true" class="btn btn-success pull-right"><i class="fa fa-check"></i> Guardar</button>
+        <button [disabled]="!miFormulario.valid"  type="submit" *ngIf="mostrarBoton == false" class="btn btn-success pull-right"><i class="fa fa-check"></i> Guardar</button>
+        <button type="button" class="btn" data-dismiss="modal"> <i class="fa fa-close"></i>Cerrar</button>
+        
+      </div>
+
+    </div>
+  </form>
+  </div>
+</div>

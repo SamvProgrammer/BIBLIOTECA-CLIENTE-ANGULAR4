@@ -4,22 +4,22 @@ import 'rxjs/Rx';
 import { RutasApiService } from '../../servicios/rutas-api.service';
 
 @Injectable()
-export class RolesService {
+export class EditorialService {
 
-  constructor(private http: Http, private rutas: RutasApiService) { }
-
-  public getlistaRoles() {
-    let ruta = this.rutas.getUri("listaRoles");
+  constructor(private rutas: RutasApiService, private http: Http) { }
+  
+  public getlista() {
+    let ruta = this.rutas.getUri("listaEditorial");
     return this.http.get(ruta).map(respuesta => respuesta.json());
   }
-  public getRol(id) {
-    let ruta = this.rutas.getUri("listaRoles") + "/" + id;
+  public get(id) {
+    let ruta = this.rutas.getUri("listaEditorial") + "/" + id;
     return this.http.get(ruta).map(respuesta => respuesta.json());
   }
 
-  public insertarRol(roles) {
-    let ruta = this.rutas.getUri("listaRoles");
-    const peticion: any = JSON.stringify(roles);
+  public insertar(editorial) {
+    let ruta = this.rutas.getUri("listaEditorial");
+    const peticion: any = JSON.stringify(editorial);
     const headers = new Headers({
       "Content-Type": "application/json"
     });
@@ -27,9 +27,9 @@ export class RolesService {
       .map(response => response.json());
   }
 
-  public actualizarRol(roles, id) {
-    let ruta = this.rutas.getUri("listaRoles") + "/" + id;
-    const peticion: any = JSON.stringify(roles);
+  public actualizar(editorial, id) {
+    let ruta = this.rutas.getUri("listaEditorial") + "/" + id;
+    const peticion: any = JSON.stringify(editorial);
     const headers = new Headers({
       "Content-Type": "application/json"
     });
@@ -37,8 +37,8 @@ export class RolesService {
       .map(response => response.json());
   }
 
-  public eliminarRol(id) {
-    let ruta = this.rutas.getUri("listaRoles") + "/" + id;
+  public eliminar(id) {
+    let ruta = this.rutas.getUri("listaEditorial") + "/" + id;
     return this.http.delete(ruta).map(respuesta => respuesta.json());
   }
 

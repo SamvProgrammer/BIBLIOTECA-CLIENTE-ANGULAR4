@@ -9,6 +9,8 @@ import { LoginService } from './servicios/login.service';
 import {RutasApiService} from './servicios/rutas-api.service';
 import { RolesService } from './servicios/catalogos/roles.service';
 import { UsuariosService } from './servicios/catalogos/usuarios.service';
+import { EditorialService } from './servicios/catalogos/editorial.service';
+import { GeneroService } from './servicios/catalogos/genero.service';
 
 import { AppComponent } from './app.component';
 import { MenuInicioComponent } from './principal/menu/menu-inicio/menu-inicio.component';
@@ -49,7 +51,8 @@ const rutas: Routes = [
     HttpModule,
     RouterModule.forRoot(rutas)
   ],
-  providers: [LoginService,RutasApiService,RolesService,UsuariosService],
+  providers: [LoginService, RutasApiService, RolesService, UsuariosService,
+              EditorialService, GeneroService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
