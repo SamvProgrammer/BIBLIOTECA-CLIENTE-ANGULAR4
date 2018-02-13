@@ -11,7 +11,7 @@ export class LoginComponent implements OnInit {
 
   public formularioLogin: FormGroup;
   public enviarLogin: any;
-  public errorLogeo:String = "";
+  public errorLogeo: String = "";
 
   erroresForm = {
     'codigo': '',
@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  constructor(private formBuilder: FormBuilder,private loginService: LoginService) { }
+  constructor(private formBuilder: FormBuilder, private loginService: LoginService) { }
 
   ngOnInit() {
     this.formularioLogin = this.formBuilder.group({
@@ -41,18 +41,18 @@ export class LoginComponent implements OnInit {
   public enviar(): void {
     this.enviarLogin = this.getLogin();
     this.errorLogeo = "";
-    this.loginService.getLogin(this.enviarLogin).subscribe(respuesta =>{
-      if(respuesta.acceso == false){
+    this.loginService.getLogin(this.enviarLogin).subscribe(respuesta => {
+      if (respuesta.acceso == false) {
         localStorage["acceso"] = false;
         this.errorLogeo = respuesta.respuesta;
-      }else{
-         localStorage["acceso"] = true;
-         this.errorLogeo = "";
-         this.loginService.setUsuario(respuesta);
-         document.location.href = "/";
+      } else {
+        localStorage["acceso"] = true;
+        this.errorLogeo = "";
+        this.loginService.setUsuario(respuesta);
+        document.location.href = "/inicio";
       }
     });
-    
+
   }
 
   public getLogin(): any {
@@ -66,16 +66,16 @@ export class LoginComponent implements OnInit {
   onValueChanged(data?: any) {
     if (!this.formularioLogin) { return; }
     const form = this.formularioLogin;
-    for(const field in this.erroresForm){
-       const control = form.get(field);
-       this.erroresForm[field] = "";
-       if (control && control.dirty && !control.valid) {
+    for (const field in this.erroresForm) {
+      const control = form.get(field);
+      this.erroresForm[field] = "";
+      if (control && control.dirty && !control.valid) {
         const messages = this.mensajesValidacion[field];
         for (const key in control.errors) {
           this.erroresForm[field] = messages[key] + ' ';
-         }
-       }
+        }
       }
+    }
   }
 
 }

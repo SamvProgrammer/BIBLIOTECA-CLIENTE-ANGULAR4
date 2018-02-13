@@ -1,3 +1,132 @@
-<p>
-  libros works!
-</p>
+<div class="row text-center">
+
+  <div class="col">
+    <p style="font-size: 30px">Cátalogo de libros</p>
+  </div>
+</div>
+<div class="row">
+  <div class="col text-right">
+    <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal" (click)="tituloModal('Agregar registro',true)">
+      <i class="fa fa-plus"></i>
+    </button>
+  </div>
+</div>
+<div class="row">
+  <div class="col">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Codigo</th>
+          <th>Nombre</th>
+          <th>Total</th>
+          <th>Cantidad</th>
+          <th>Autor</th>
+          <th>genero</th>
+          <th>Editorial</th>
+          <th>Opciones</th>
+        </tr>
+      </thead>
+      <tbody>
+
+        <tr *ngFor="let item of libros">
+          <td scope="row">{{item.codigo}}</td>
+          <td>{{item.nombre}}</td>
+          <td>{{item.total}}</td>
+          <td>{{item.cantidad}}</td>
+          <td>{{item.autor}}</td>
+          <td>{{item.genero}}</td>
+          <td>{{item.editorial}}</td>
+          <td>
+            <button class="btn btn-default" data-toggle="modal" data-target="#myModal" (click)="tituloModal('Actualizar registro',false);obtenerRegistro(item.codigo);">
+              <i class="fa fa-refresh"></i>
+            </button>
+            <button class="btn btn-danger" (click)="eliminar(item.codigo);">
+              <i class="fa fa-remove"></i>
+            </button>
+          </td>
+        </tr>
+
+      </tbody>
+    </table>
+    <div *ngIf="!libros" class="alert alert-danger text-center" role="alert">
+      <strong></strong> Sin registros en las tablas
+    </div>
+  </div>
+</div>
+
+
+
+
+<!-- The Modal -->
+<div class="modal fade" id="myModal">
+  <div class="modal-dialog modal-lg">
+    <form [formGroup]="miFormulario" (ngSubmit)="enviar()">
+      <div class="modal-content">
+
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">{{titulo}}</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+
+        <!-- Modal body -->
+        <div class="modal-body">
+          <div class="col">
+            <div class="form-area">
+              <br style="clear:both">
+
+              <div class="form-group">
+                <label>Código:</label>
+                <input formControlName="codigo" type="text" class="form-control text-uppercase" id="codigo" [(ngModel)]="codigo" placeholder="Ingresar código">
+              </div>
+              <div class="form-group">
+                <label>Nombre:</label>
+                <input formControlName="nombre" type="text" class="form-control text-uppercase" id="nombre" [(ngModel)]="nombre" placeholder="Ingresar nombre">
+              </div>
+              <div class="form-group">
+                <label>Total:</label>
+                <input formControlName="total" type="text" class="form-control text-uppercase" id="total" [(ngModel)]="total" placeholder="Ingresar total">
+              </div>
+              <div class="form-group">
+                <label>Cantidad:</label>
+                <input formControlName="cantidad" type="text" class="form-control text-uppercase" id="cantidad" [(ngModel)]="cantidad" placeholder="Ingresar cantidad">
+              </div>
+              <div class="form-group">
+                <label>Autor:</label>
+                <input formControlName="autor" type="text" class="form-control text-uppercase" id="autor" [(ngModel)]="autor" placeholder="Ingresar autor">
+              </div>
+              <div class="form-group">
+                <label>Genero:</label>
+                <select formControlName="idGenero" [(ngModel)]="genero" id="idGenero" class="form-control">
+                  <option value="">Seleccionar genero</option>
+                  <option *ngFor="let item of generos" [value]="item.id">{{item.genero}}</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Editorial:</label>
+                <select formControlName="idEditorial" [(ngModel)]="editorial" id="idEditorial" class="form-control">
+                  <option value="">Seleccionar editorial</option>
+                  <option *ngFor="let item of editoriales" [value]="item.id">{{item.editorial}}</option>
+                </select>
+              </div>
+
+
+            </div>
+          </div>
+        </div>
+
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button [disabled]="!miFormulario.valid" type="submit" *ngIf="mostrarBoton == true" class="btn btn-success pull-right">
+            <i class="fa fa-check"></i> Guardar</button>
+          <button [disabled]="!miFormulario.valid" type="submit" *ngIf="mostrarBoton == false" class="btn btn-success pull-right">
+            <i class="fa fa-check"></i> Guardar</button>
+          <button type="button" class="btn" data-dismiss="modal">
+            <i class="fa fa-close"></i>Cerrar</button>
+
+        </div>
+
+      </div>
+    </form>
+  </div>
+</div>

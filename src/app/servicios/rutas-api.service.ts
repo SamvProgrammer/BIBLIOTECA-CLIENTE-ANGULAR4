@@ -7,7 +7,8 @@ export class RutasApiService {
     "listaRoles":"/api/catalogos/roles",
     "listaUsuarios":"/api/catalogos/usuarios",
     "listaEditorial":"/api/catalogos/editorial",
-    "listaGeneros":"/api/catalogos/generos"
+    "listaGeneros":"/api/catalogos/generos",
+    "listaLibros":"/api/catalogos/libros"
   };
   constructor() { }
   public getUri(variable):any{

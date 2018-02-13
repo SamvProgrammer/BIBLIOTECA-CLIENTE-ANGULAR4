@@ -11,6 +11,7 @@ import { RolesService } from './servicios/catalogos/roles.service';
 import { UsuariosService } from './servicios/catalogos/usuarios.service';
 import { EditorialService } from './servicios/catalogos/editorial.service';
 import { GeneroService } from './servicios/catalogos/genero.service';
+import { LibrosService } from './servicios/catalogos/libros.service';
 
 import { AppComponent } from './app.component';
 import { MenuInicioComponent } from './principal/menu/menu-inicio/menu-inicio.component';
@@ -23,12 +24,12 @@ import { GenerosComponent } from './principal/catalogos/generos/generos.componen
 import { LibrosComponent } from './principal/catalogos/libros/libros.component';
 
 const rutas: Routes = [
-  {path: "inicio", component : HomeComponent},
-  {path: "roles", component : RolesComponent},
-  {path: "usuarios", component : UsuariosComponent},
-  {path: "editorial", component : EditorialComponent},
-  {path: "generos", component : GenerosComponent},
-  {path: "libros", component : LibrosComponent}
+  {path: 'inicio', component : HomeComponent},
+  {path: 'roles', component : RolesComponent},
+  {path: 'usuarios', component : UsuariosComponent},
+  {path: 'editorial', component : EditorialComponent},
+  {path: 'generos', component : GenerosComponent},
+  {path: 'libros', component : LibrosComponent}
 ];
 
 
@@ -52,7 +53,7 @@ const rutas: Routes = [
     RouterModule.forRoot(rutas)
   ],
   providers: [LoginService, RutasApiService, RolesService, UsuariosService,
-              EditorialService, GeneroService],
+              EditorialService, GeneroService, LibrosService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
