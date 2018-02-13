@@ -1,0 +1,88 @@
+<div class="row text-center">
+   
+  <div class="col">
+      <p style="font-size: 30px" >Cátalogo de roles</p>
+  </div>
+</div>
+<div class="row">
+  <div class="col text-right">
+      <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal" (click)="tituloModal('Agregar registro',true)"><i class="fa fa-plus"></i></button>
+  </div>
+</div>
+<div class="row">
+   <div class="col">
+     <table class="table table-striped">
+       <thead>
+        <tr>
+            <th>#</th>
+            <th>Rol</th>
+            <th>Rango</th>
+            <th>Opciones</th>
+        </tr>
+       </thead>
+       <tbody>
+         
+         <tr *ngFor = "let item of objRoles">
+             <td scope="row">{{item.id}}</td>
+             <td>{{item.rol}}</td>
+             <td>{{(item.rango == 1)?"Todos los permisos":"Permisos limitados"}}</td>
+             <td>
+                <button class="btn btn-default" data-toggle="modal" data-target="#myModal" (click)="tituloModal('Actualizar registro',false);obtenerRegistro(item.id);"> <i class="fa fa-refresh"></i></button>
+                <button class="btn btn-danger" (click)="eliminar(item.id);"> <i class="fa fa-remove"></i></button>
+             </td>
+         </tr>
+
+       </tbody>
+     </table>
+     <div *ngIf="!objRoles" class="alert alert-danger text-center" role="alert">
+      <strong></strong> Sin registros en las tablas
+    </div>
+   </div>
+</div>
+
+<!-- The Modal -->
+<div class="modal fade" id="myModal">
+    <div class="modal-dialog">
+      <form [formGroup]="miFormulario" (ngSubmit)="enviar()">
+      <div class="modal-content">
+  
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">{{titulo}}</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+  
+        <!-- Modal body -->
+        <div class="modal-body">
+            <div class="col">
+                <div class="form-area">  
+                    <br style="clear:both">
+                                
+                        <div class="form-group">
+                            <label>ROL:</label>
+                        <input  formControlName="rol" type="text" class="form-control text-uppercase" id="rol" [(ngModel)] = "rol" placeholder="Ingresar rol" required>
+                      </div>
+                      <div class="form-group">
+                        <label>RANGO:</label>
+                        <select  formControlName="rango" [(ngModel)] = "rango" id="rango" class="form-control text-uppercase">
+                          <option value = "">Seleccionar rango</option>
+                          <option value = 1>Todos los permisos</option>
+                          <option value = 2>Permisos limitados</option>
+                        </select>
+                      </div>
+                    </div>
+            </div>
+        </div>
+  
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button [disabled]="!miFormulario.valid" type="submit" *ngIf="mostrarBoton == true" class="btn btn-success pull-right"><i class="fa fa-check"></i> Guardar</button>
+          <button [disabled]="!miFormulario.valid"  type="submit" *ngIf="mostrarBoton == false" class="btn btn-success pull-right"><i class="fa fa-check"></i> Guardar</button>
+          <button type="button" class="btn" data-dismiss="modal"> <i class="fa fa-close"></i>Cerrar</button>
+          
+        </div>
+  
+      </div>
+    </form>
+    </div>
+  </div>

@@ -1,0 +1,55 @@
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+
+<div class="nav-side-menu">
+    <div class="brand" style="display: inline">Sistema bliblioteca</div>
+    <div style="display: inline; padding-left: 50%; font-size: 70">Usuario actual: {{usuario.nombre}} {{usuario.apellido_paterno}} {{usuario.rol}} <button (click)="salir();" class=""><i class="fa fa-power-off"></i></button></div>
+    <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
+         
+        <div class="menu-list">
+  
+            <ul id="menu-content" class="menu-content collapse out" >
+                <li [ngClass]="{'active': selectedIndex == 0}"  (click)="seleccionaIndice(0)" routerLink="/inicio">
+                  <a>
+                  <i class="fa fa-home"></i> Inicio
+                  </a>
+                </li>
+
+                <li  data-toggle="collapse" data-target="#products" class="collapsed " [ngClass]="{'active': selectedIndex == 1}"  (click)="seleccionaIndice(1)">
+                  <a ><i class="fa fa-gift fa-lg"></i> Catálogos <span class="arrow"></span></a>
+                </li>
+                <ul class="sub-menu collapse" id="products" >
+                    <li routerLink="/usuarios" ><a >Usuarios</a></li>
+                    <li routerLink="/roles"><a >Roles</a></li>
+                    <li routerLink="/libros" ><a >Libros</a></li>
+                    <li routerLink="/editorial"><a >Editorial</a></li>
+                    <li routerLink="/generos"><a >Generos</a></li>
+                    
+                </ul>
+
+
+                <li data-toggle="collapse" data-target="#service" class="collapsed" [ngClass]="{'active': selectedIndex == 2}"  (click)="seleccionaIndice(2)">
+                  <a ><i class="fa fa-book"></i> Libros <span class="arrow"></span></a>
+                </li>  
+                <ul  class="sub-menu collapse"  id="service" >
+                  <li >Prestamos</li>
+                  <li>Apartados</li>
+                </ul>
+
+
+                
+
+
+                 <li [ngClass]="{'active': selectedIndex == 3}"  (click)="seleccionaIndice(3)">
+                  <a href="#">
+                  <i class="fa fa-user fa-lg "></i> Pefil de usuario
+                  </a>
+                  </li>
+
+                 <li (click)="seleccionaIndice(-1);salir();">
+                  <a >
+                  <i class="fa fa-power-off"></i> Salir
+                  </a>
+                </li>
+            </ul>
+     </div>
+</div>

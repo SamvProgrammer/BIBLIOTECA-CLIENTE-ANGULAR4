@@ -1,18 +1,55 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { ReactiveFormsModule,FormsModule} from '@angular/forms'; 
+import { HttpModule } from '@angular/http';
+import {  RouterModule, Routes } from '@angular/router';
 
+
+import { LoginService } from './servicios/login.service';
+import {RutasApiService} from './servicios/rutas-api.service';
+import { RolesService } from './servicios/catalogos/roles.service';
+import { UsuariosService } from './servicios/catalogos/usuarios.service';
 
 import { AppComponent } from './app.component';
+import { MenuInicioComponent } from './principal/menu/menu-inicio/menu-inicio.component';
+import { LoginComponent } from './principal/login/login.component';
+import { HomeComponent } from './principal/home/home/home.component';
+import { RolesComponent } from './principal/catalogos/roles/roles/roles.component';
+import { UsuariosComponent } from './principal/catalogos/usuarios/usuarios/usuarios.component';
+import { EditorialComponent } from './principal/catalogos/editorial/editorial.component';
+import { GenerosComponent } from './principal/catalogos/generos/generos.component';
+import { LibrosComponent } from './principal/catalogos/libros/libros.component';
+
+const rutas: Routes = [
+  {path: "inicio", component : HomeComponent},
+  {path: "roles", component : RolesComponent},
+  {path: "usuarios", component : UsuariosComponent},
+  {path: "editorial", component : EditorialComponent},
+  {path: "generos", component : GenerosComponent},
+  {path: "libros", component : LibrosComponent}
+];
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    MenuInicioComponent,
+    LoginComponent,
+    HomeComponent,
+    RolesComponent,
+    UsuariosComponent,
+    EditorialComponent,
+    GenerosComponent,
+    LibrosComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    ReactiveFormsModule,
+    FormsModule,
+    HttpModule,
+    RouterModule.forRoot(rutas)
   ],
-  providers: [],
+  providers: [LoginService,RutasApiService,RolesService,UsuariosService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

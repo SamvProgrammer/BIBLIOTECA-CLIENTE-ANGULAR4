@@ -1,0 +1,134 @@
+<div class="row text-center">
+
+  <div class="col">
+    <p style="font-size: 30px">Cátalogo de usuarios</p>
+  </div>
+</div>
+<div class="row">
+  <div class="col text-right">
+    <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal" (click)="tituloModal('Agregar registro',true)">
+      <i class="fa fa-plus"></i>
+    </button>
+  </div>
+</div>
+<div class="row">
+  <div class="col">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Código</th>
+          <th>Nombre</th>
+          <th>Apellido paterno</th>
+          <th>Apellido Materno</th>
+          <th>Fecha de nacimiento</th>
+          <th>Rol</th>
+          <th>Rango</th>
+          <th>Opciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of usuarios">
+          <td scope="row">{{item.codigo}}</td>
+          <td>{{item.nombre}}</td>
+          <td>{{item.apellido_paterno}}</td>
+          <td>{{item.apellido_materno}}</td>
+          <td>{{item.fecha_nacimiento}}</td>
+          <td>{{item.rol}}</td>
+          <td>{{(item.rango == 1)?"Todos los permisos":"Permisos limitados"}}</td>
+          <td>
+            <button class="btn btn-default" data-toggle="modal" data-target="#myModal" (click)="tituloModal('Actualizar registro',false);obtenerRegistro(item.codigo);">
+              <i class="fa fa-refresh"></i>
+            </button>
+            <button class="btn btn-danger" (click)="eliminar(item.codigo);">
+              <i class="fa fa-remove"></i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div *ngIf="!usuarios" class="alert alert-danger text-center" role="alert">
+      <strong></strong> Sin registros en las tablas
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+<!-- The Modal -->
+<div class="modal fade" id="myModal">
+  <div class="modal-dialog modal-lg">
+    <form [formGroup]="miFormulario" (ngSubmit)="enviar()">
+      <div class="modal-content">
+
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">{{titulo}}</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+
+        <!-- Modal body -->
+        <div class="modal-body">
+          <div class="col">
+            <div class="form-area">
+              <br style="clear:both">
+
+              <div class="form-group">
+                <label>CÓDIGO:</label>
+                <input [(ngModel)] = "codigo" formControlName="codigo" type="text" class="form-control text-uppercase" id="codigo"  placeholder="Ingresar código"
+                  required>
+              </div>
+              <div class="form-group">
+                <label>NOMBRE:</label>
+                <input [(ngModel)] = "nombre" formControlName="nombre" type="text" class="form-control text-uppercase" id="nombre"  placeholder="Ingresar nombre"
+                  required>
+              </div>
+              <div class="form-group">
+                <label>APELLIDO PATERNO:</label>
+                <input [(ngModel)] = "apellido_paterno" formControlName="apellido_paterno" type="text" class="form-control text-uppercase" id="apellido_paterno"  placeholder="Ingresar apellido paterno"
+                  required>
+              </div>
+              <div class="form-group">
+                <label>APELLIDO MATERNO:</label>
+                <input [(ngModel)] = "apellido_materno" formControlName="apellido_materno" type="text" class="form-control text-uppercase" id="apellido_materno"  placeholder="Ingresar apellido materno"
+                  required>
+              </div>
+              <div class="form-group">
+                <label>FECHA NACIMIENTO:</label>
+                <input [(ngModel)] = "fecha_nacimiento" formControlName="fecha_nacimiento" type="date" class="form-control text-uppercase" id="fecha_nacimiento"  placeholder="Ingresar fecha nacimiento"
+                  required>
+              </div>
+              <div class="form-group">
+                <label>CONTRASEÑA:</label>
+                <input [(ngModel)] = "password" formControlName="password" type="password" class="form-control text-uppercase" id="password" placeholder="Ingresar contraseña"
+                  required>
+              </div>
+
+              <div class="form-group">
+                <label>ROL:</label>
+                <select [(ngModel)] = "role" formControlName="rol" id="rol" class="form-control text-uppercase">
+                  <option value="">Seleccionar rango</option>
+                  <option *ngFor="let item of listaRoles"  [value]="item.id">{{item.rol}}</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button [disabled]="!miFormulario.valid" type="submit" *ngIf="mostrarBoton == true" class="btn btn-success pull-right">
+            <i class="fa fa-check"></i> Guardar</button>
+          <button [disabled]="!miFormulario.valid" type="submit" *ngIf="mostrarBoton == false" class="btn btn-success pull-right">
+            <i class="fa fa-check"></i> Guardar</button>
+          <button type="button" class="btn" data-dismiss="modal">
+            <i class="fa fa-close"></i>Cerrar</button>
+
+        </div>
+
+      </div>
+    </form>
+  </div>
+</div>
