@@ -22,6 +22,7 @@ import { UsuariosComponent } from './principal/catalogos/usuarios/usuarios/usuar
 import { EditorialComponent } from './principal/catalogos/editorial/editorial.component';
 import { GenerosComponent } from './principal/catalogos/generos/generos.component';
 import { LibrosComponent } from './principal/catalogos/libros/libros.component';
+import { ApartadosComponent } from './principal/operaciones/apartados/apartados.component';
 
 const rutas: Routes = [
   {path: 'inicio', component : HomeComponent},
@@ -29,7 +30,8 @@ const rutas: Routes = [
   {path: 'usuarios', component : UsuariosComponent},
   {path: 'editorial', component : EditorialComponent},
   {path: 'generos', component : GenerosComponent},
-  {path: 'libros', component : LibrosComponent}
+  {path: 'libros', component : LibrosComponent},
+  {path: 'apartados',component:ApartadosComponent}
 ];
 
 
@@ -43,7 +45,8 @@ const rutas: Routes = [
     UsuariosComponent,
     EditorialComponent,
     GenerosComponent,
-    LibrosComponent
+    LibrosComponent,
+    ApartadosComponent
   ],
   imports: [
     BrowserModule,

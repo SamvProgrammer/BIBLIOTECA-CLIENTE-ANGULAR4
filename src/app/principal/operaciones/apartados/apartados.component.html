@@ -1,0 +1,23 @@
+<div class="row text-center">   
+  <div class="col">
+      <p style="font-size: 30px" >Módulo de apartados</p>
+  </div>
+</div>
+
+<div class="row text-center">   
+  <div class="col">
+      <select #filtrar class="form-control">
+            <option value ="0">Filtrar libros</option>
+            <option value = "1">Genero</option>
+            <option value ="2">Editorial</option>
+      </select>
+      <select #editorial class="form-control" *ngif="filtrar = 1">
+        <option value ="0">--- Escoger editorial ---</option>
+  </select>
+  <select #libros class="form-control" *ngif="filtrar = 2">
+    <option value ="0">Filtrar libros</option>
+    <option value = "1">Genero</option>
+    <option value ="2">Editorial</option>
+</select>
+  </div>
+</div>
