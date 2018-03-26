@@ -22,6 +22,7 @@ export class LoginService {
     localStorage["apellido_paterno"] = usuario.apellido_paterno;
     localStorage["apellido_materno"] = usuario.apellido_materno;
     localStorage["fecha_nacimiento"] = usuario.fecha_nacimiento;
+    localStorage["codigo"] = usuario.codigo;
     let rolMaximo:any = undefined;
     for (let item of usuario.roles) {
        if(rolMaximo == undefined){
@@ -42,7 +43,8 @@ export class LoginService {
       "nombre":localStorage["nombre"],
       "apellido_paterno":localStorage["apellido_paterno"],
       "rol":localStorage["rol"],
-      "rango":localStorage["rango"]
+      "rango":localStorage["rango"],
+      "codigo":localStorage["codigo"]
     }
     return obj;
   }

@@ -1,23 +1,69 @@
-<div class="row text-center">   
+<div class="row text-center">
   <div class="col">
-      <p style="font-size: 30px" >Módulo de apartados</p>
+    <p style="font-size: 30px">Módulo de apartados</p>
   </div>
 </div>
 
-<div class="row text-center">   
+<div class="row text-center">
   <div class="col">
-      <select #filtrar class="form-control">
-            <option value ="0">Filtrar libros</option>
-            <option value = "1">Genero</option>
-            <option value ="2">Editorial</option>
-      </select>
-      <select #editorial class="form-control" *ngif="filtrar = 1">
-        <option value ="0">--- Escoger editorial ---</option>
-  </select>
-  <select #libros class="form-control" *ngif="filtrar = 2">
-    <option value ="0">Filtrar libros</option>
-    <option value = "1">Genero</option>
-    <option value ="2">Editorial</option>
-</select>
+    <select #filtrar class="form-control" [(ngModel)]="opcion" (change)="cambia();">
+      <option value="0">Filtrar libros</option>
+      <option value="1">Editorial</option>
+      <option value="2">Genero</option>
+    </select>
+   
+    <select #editorial class="form-control" *ngIf="opcion == 1" (change)="cambia();" [(ngModel)]="codigo">
+      <option value="0">Escoger editorial</option>
+      <option *ngFor="let item of editoriales"  value="{{item.id}}" >{{item.editorial}}</option>
+    </select>
+
+    <select #genero class="form-control" *ngIf="opcion == 2" [(ngModel)]="codigo" (change)="cambia();">
+      <option value="0">Escoger genero</option>
+      <option *ngFor="let item of generos"  value="{{item.id}}" >{{item.genero}}</option>
+    </select>
   </div>
+  
 </div>
+
+  
+  <div class="row">
+     <div class="col">
+       <table class="table table-striped">
+         <thead>
+          <tr>
+              <th>Código</th>
+              <th>Libro</th>
+              <th>Autor</th>
+              <th>Genero</th>
+              <th>Editorial</th>
+              <th>Opciones</th>
+          </tr>
+         </thead>
+         <tbody>
+           
+           <tr *ngFor = "let item of apartados" [ngClass]="{'bordeAgotado':item.notificar == true}">
+               <td scope="row">{{item.codigo}}</td>
+               <td>{{item.nombre}}</td>
+               <td>{{item.autor}}</td>
+               <td>{{item.genero}}</td>
+               <td>{{item.editorial}}</td>
+               <td>
+                  <button #index style="width: 100%" [ngClass]="{'btn btn-success':item.notificar == false,'btn btn-danger':item.notificar == true,'btn btn-default':item.apartado==true}" [disabled]="item.apartado" (click)="apartar(item.codigo,index)"><i class="fa fa-check"></i>{{item.apartadoName}}</button>
+                  
+               </td>
+               <div>
+                  <div *ngIf="item.notificar == true" style="padding-top: 18px;">
+                      <label for="">Notificar</label>
+                      <input type="checkbox" >
+                    </div>
+               </div>
+                            
+           </tr>  
+         </tbody>
+       </table>
+       <div *ngIf="!apartados" class="alert alert-danger text-center" role="alert">
+        <strong></strong> Sin registros en las tablas
+      </div>
+     </div>
+  </div>
+  

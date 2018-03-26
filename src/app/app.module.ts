@@ -12,6 +12,8 @@ import { UsuariosService } from './servicios/catalogos/usuarios.service';
 import { EditorialService } from './servicios/catalogos/editorial.service';
 import { GeneroService } from './servicios/catalogos/genero.service';
 import { LibrosService } from './servicios/catalogos/libros.service';
+import { ApartadosService } from './servicios/operaciones/apartados.service';
+import { PedidosService } from './servicios/operaciones/pedidos.service';
 
 import { AppComponent } from './app.component';
 import { MenuInicioComponent } from './principal/menu/menu-inicio/menu-inicio.component';
@@ -23,6 +25,7 @@ import { EditorialComponent } from './principal/catalogos/editorial/editorial.co
 import { GenerosComponent } from './principal/catalogos/generos/generos.component';
 import { LibrosComponent } from './principal/catalogos/libros/libros.component';
 import { ApartadosComponent } from './principal/operaciones/apartados/apartados.component';
+import { PedidosComponent } from './principal/operaciones/pedidos/pedidos.component';
 
 const rutas: Routes = [
   {path: 'inicio', component : HomeComponent},
@@ -31,7 +34,8 @@ const rutas: Routes = [
   {path: 'editorial', component : EditorialComponent},
   {path: 'generos', component : GenerosComponent},
   {path: 'libros', component : LibrosComponent},
-  {path: 'apartados',component:ApartadosComponent}
+  {path: 'apartados',component:ApartadosComponent},
+  {path: 'pedidos',component:PedidosComponent}
 ];
 
 
@@ -46,7 +50,8 @@ const rutas: Routes = [
     EditorialComponent,
     GenerosComponent,
     LibrosComponent,
-    ApartadosComponent
+    ApartadosComponent,
+    PedidosComponent
   ],
   imports: [
     BrowserModule,
@@ -56,7 +61,7 @@ const rutas: Routes = [
     RouterModule.forRoot(rutas)
   ],
   providers: [LoginService, RutasApiService, RolesService, UsuariosService,
-              EditorialService, GeneroService, LibrosService],
+              EditorialService, GeneroService, LibrosService,ApartadosService,PedidosService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

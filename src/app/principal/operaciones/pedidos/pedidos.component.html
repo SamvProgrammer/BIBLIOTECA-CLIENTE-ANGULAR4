@@ -1,0 +1,116 @@
+<div class="row text-center">
+  <div class="col">
+    <p style="font-size: 30px">Módulo de autorización de libros</p>
+  </div>
+</div>
+
+<div class="row text-center">
+  <div class="col">
+    <select #filtrar class="form-control" [(ngModel)]="opcion" (change)="cambia();">
+      <option value="0">Filtrar pedidos</option>
+      <option value="1">Libros</option>
+      <option value="2">Usuarios en el sistema</option>
+    </select>
+
+    <select #libros class="form-control" *ngIf="opcion == 1" (change)="cambia();" [(ngModel)]="codigo">
+      <option value="0">Escoger libro</option>
+      <option *ngFor="let item of librosArray" value="{{item.codigo}}">{{item.nombre}}</option>
+    </select>
+
+    <select #usuarios class="form-control" *ngIf="opcion == 2" [(ngModel)]="codigo" (change)="cambia();">
+      <option value="0">Escoger usuario</option>
+      <option *ngFor="let item of usuariosArray" value="{{item.codigo}}">{{item.nombre}}</option>
+    </select>
+  </div>
+
+</div>
+
+
+<div class="row">
+  <div class="col">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Código libro</th>
+          <th>Nombre libro</th>
+          <th>Numero de control</th>
+          <th>Solicitante</th>
+          <th>Fecha inicio</th>
+          <th>Fecha entrega</th>
+          <th>Estado del libro</th>
+          <th>Opciones</th>
+        </tr>
+      </thead>
+      <tbody>
+
+        <tr *ngFor="let item of pedidos">
+          <td scope="row">{{item.codigo_libro}}</td>
+          <td>{{item.nombre}}</td>
+          <td>{{item.codigo_usuario}}</td>
+          <td>{{item.nombre_usuario}}</td>
+          <td>{{item.fecha_inicio}}</td>
+          <td>{{item.fecha_fin}}</td>
+          <td>{{item.prestado}}</td>
+          <td>
+            <button *ngIf="item.prestado == 0" (click)="abrirModal(item.nombre,item.nombre_usuario,item.codigo_libro,item.codigo_usuario);" data-toggle="modal" data-target="#myModal" #index style="width: 100%" class="btn btn-success">
+              <i class="fa fa-check"></i>Autorizar pedido</button>
+              <button *ngIf="item.prestado == 1" style="width: 100%" class="btn btn-info"><i class="fa fa-check"></i>Devolver libro</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div *ngIf="!pedidos" class="alert alert-danger text-center" role="alert">
+      <strong></strong> Sin registros en la tabla
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="myModal">
+  <div class="modal-dialog">
+    <form [formGroup]="miFormulario" (ngSubmit)="enviar()">
+      <div class="modal-content">
+
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Autorización del libro</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+
+        <!-- Modal body -->
+        <div class="modal-body">
+          <div class="col">
+            <div class="form-area">
+              <br style="clear:both">
+              <div class="form-group">
+                <label>NOMBRE LIBRO:</label>
+                <input formControlName="txtIdLibro" disabled type="hidden" class="form-control text-uppercase" id="txtIdLibro" [(ngModel)]="txtIdLibro">
+                <input formControlName="txtIdUsuario" disabled type="hidden" class="form-control text-uppercase" id="txtIdUsuario" [(ngModel)]="txtIdUsuario">
+                <input formControlName="txtLibro" disabled type="text" class="form-control text-uppercase" id="txtLibro" [(ngModel)]="txtLibro">
+              </div>
+              <div class="form-group">
+                  <label>NOMBRE SOLICITANTE:</label>
+                  <input formControlName="txtSolicitante" disabled type="text" class="form-control text-uppercase" id="txtSolicitante" [(ngModel)]="txtSolicitante">
+                </div>
+              <div class="form-group">
+                <label>FECHA DE DEVOLUCIÓN:</label>
+                <input formControlName="fechaFinal" type="date" class="form-control text-uppercase" id="fechaFinal" [(ngModel)]="fechaFinal">
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button [disabled]="!miFormulario.valid" type="submit"  class="btn btn-success pull-right">
+            <i class="fa fa-check"></i> Autorizar</button>
+          <button type="button" class="btn" data-dismiss="modal">
+            <i class="fa fa-close"></i>Cerrar</button>
+
+        </div>
+
+      </div>
+    </form>
+  </div>
+</div>
