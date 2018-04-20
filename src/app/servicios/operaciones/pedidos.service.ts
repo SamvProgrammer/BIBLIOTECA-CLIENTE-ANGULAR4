@@ -12,7 +12,8 @@ export class PedidosService {
     let ruta = this.rutas.getUri("listaPedidos")+"?tipo="+objeto["tipo"]+"&codigo="+objeto["codigo"]+"&idUsuario="+objeto["idUsuario"];
     return this.http.get(ruta).map(respuesta => respuesta.json());
   }
-  public apartar(objeto){
+
+  public devolverLibro(objeto){
     let ruta = this.rutas.getUri("listaPedidos");
     const peticion: any = JSON.stringify(objeto);
     const headers = new Headers({

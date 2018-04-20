@@ -24,6 +24,8 @@ export class PedidosComponent implements OnInit {
   public txtLibro;
   public txtIdLibro;
   public txtIdUsuario;
+  public mostrarObservacion:boolean = false;
+  public observa:any;
 
   constructor(private pedidosService:PedidosService,
               private librosService:LibrosService,
@@ -53,7 +55,8 @@ export class PedidosComponent implements OnInit {
       txtLibro : '',
       txtSolicitante : '',
       txtIdLibro:'',
-      txtIdUsuario:''
+      txtIdUsuario:'',
+      observaciones:''
     });
   }
 
@@ -68,23 +71,42 @@ export class PedidosComponent implements OnInit {
        this.pedidos = respuesta;    
     });
   }
-  public abrirModal(libro,solicitante,codigoLibro,codigoUsuario){
+  public abrirModal(libro,solicitante,codigoLibro,codigoUsuario,mostrar){
     this.txtLibro = libro;
     this.txtSolicitante = solicitante;
     this.fechaFinal = "";
     this.txtIdUsuario = codigoUsuario;
     this.txtIdLibro = codigoLibro;
+    this.mostrarObservacion = mostrar;
+   
   }
 
   public enviar(){
-    let objeto = {
-      "codigo":this.txtIdLibro,
-      "idUsuario":this.txtIdUsuario,
-      "prestado":true,
-      "fechaFinal":this.fechaFinal
+    if(!this.mostrarObservacion){
+      let objeto = {
+        "tipo":"0",
+        "codigo":this.txtIdLibro,
+        "idUsuario":this.txtIdUsuario,
+        "prestado":true,
+        "fechaFinal":this.fechaFinal
+      }
+      this.apartadoService.apartar(objeto).subscribe(respuesta =>{
+        alert(respuesta["respuesta"]);
+        $("#myModal").modal("hide");
+        this.pedidosService.getlista(objeto).subscribe(respuesta => {
+          this.pedidos = respuesta;
+      });
+      });
+    }else{
+      let objeto = {
+        "tipo":"0",
+        "codigo":this.txtIdLibro,
+        "idUsuario":this.txtIdUsuario,
+        "observacion":this.observa
+      }
+     this.pedidosService.devolverLibro(objeto).subscribe(respuesta => {
+         console.log(respuesta);
+     });
     }
-    this.apartadoService.apartar(objeto).subscribe(respuesta =>{
-      alert(respuesta["respuesta"]);
-    });
   }
 }
