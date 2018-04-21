@@ -1,0 +1,39 @@
+<div class="row text-center">
+
+  <div class="col">
+    <p style="font-size: 30px">Historico de los pedidos de libros</p>
+  </div>
+</div>
+<div class="row">
+  <div class="col">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Código libro</th>
+          <th>Libro</th>
+          <th>Código usuario</th>
+          <th>Usuario</th>
+          <th>Fecha inicio</th>
+          <th>Fecha fin</th>
+          <th>Observaciones</th>
+        </tr>
+      </thead>
+      <tbody>
+
+        <tr *ngFor="let item of historicos">
+          <td scope="row">{{item.id}}</td>
+          <td>{{item.codigo_libro}}</td>
+          <td>{{item.libro}}</td>
+          <td>{{item.codigo_usuario}}</td>
+          <td>{{item.nombre}}</td>
+          <td>{{item.fecha_inicio}}</td>
+          <td>{{item.fecha_fin}}</td>
+          <td>{{item.observaciones}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+

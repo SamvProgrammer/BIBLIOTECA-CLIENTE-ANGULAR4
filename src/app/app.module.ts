@@ -6,7 +6,7 @@ import {  RouterModule, Routes } from '@angular/router';
 
 
 import { LoginService } from './servicios/login.service';
-import {RutasApiService} from './servicios/rutas-api.service';
+import { RutasApiService } from './servicios/rutas-api.service';
 import { RolesService } from './servicios/catalogos/roles.service';
 import { UsuariosService } from './servicios/catalogos/usuarios.service';
 import { EditorialService } from './servicios/catalogos/editorial.service';
@@ -14,6 +14,8 @@ import { GeneroService } from './servicios/catalogos/genero.service';
 import { LibrosService } from './servicios/catalogos/libros.service';
 import { ApartadosService } from './servicios/operaciones/apartados.service';
 import { PedidosService } from './servicios/operaciones/pedidos.service';
+import { HistorialService } from './servicios/operaciones/historial.service';
+import { AutentificandoService } from './servicios/autentificando.service';
 
 import { AppComponent } from './app.component';
 import { MenuInicioComponent } from './principal/menu/menu-inicio/menu-inicio.component';
@@ -26,6 +28,7 @@ import { GenerosComponent } from './principal/catalogos/generos/generos.componen
 import { LibrosComponent } from './principal/catalogos/libros/libros.component';
 import { ApartadosComponent } from './principal/operaciones/apartados/apartados.component';
 import { PedidosComponent } from './principal/operaciones/pedidos/pedidos.component';
+import { HistorialComponent } from './principal/operaciones/historial/historial.component';
 
 const rutas: Routes = [
   {path: 'inicio', component : HomeComponent},
@@ -35,7 +38,8 @@ const rutas: Routes = [
   {path: 'generos', component : GenerosComponent},
   {path: 'libros', component : LibrosComponent},
   {path: 'apartados',component:ApartadosComponent},
-  {path: 'pedidos',component:PedidosComponent}
+  {path: 'pedidos',component:PedidosComponent},
+  {path: 'historico',component:HistorialComponent}
 ];
 
 
@@ -51,7 +55,8 @@ const rutas: Routes = [
     GenerosComponent,
     LibrosComponent,
     ApartadosComponent,
-    PedidosComponent
+    PedidosComponent,
+    HistorialComponent
   ],
   imports: [
     BrowserModule,
@@ -61,7 +66,8 @@ const rutas: Routes = [
     RouterModule.forRoot(rutas)
   ],
   providers: [LoginService, RutasApiService, RolesService, UsuariosService,
-              EditorialService, GeneroService, LibrosService,ApartadosService,PedidosService],
+              EditorialService, GeneroService, LibrosService,ApartadosService,PedidosService,HistorialService,
+              AutentificandoService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -10,7 +10,8 @@ export class RutasApiService {
     "listaGeneros":"/api/catalogos/generos",
     "listaLibros":"/api/catalogos/libros",
     "listaApartados":"/api/operaciones/apartados",
-    "listaPedidos":"/api/operaciones/pedidos"
+    "listaPedidos":"/api/operaciones/pedidos",
+    "listaHistorico":"/api/operaciones/historico"
   };
   constructor() { }
   public getUri(variable):any{

@@ -63,8 +63,18 @@ export class ApartadosComponent implements OnInit {
        "prestado":false
      }
      this.apartadosService.apartar(objeto).subscribe(respuesta => {
-       alert("Libro apartado");
+      swal("Éxito", "Libro apartado correctamente!", {
+        icon: "success",
+      });
       btn.childNodes[1].textContent = "apartado";
+      let objeto1 = {
+        "tipo":"0",
+        "codigo":"0",
+        "idUsuario":usuarios["codigo"] 
+      }
+      this.apartadosService.getlista(objeto1).subscribe(respuesta => {
+        this.apartados = respuesta;
+    });
      });
   }
 

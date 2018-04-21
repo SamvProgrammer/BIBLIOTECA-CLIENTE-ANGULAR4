@@ -4,5 +4,10 @@ import { Injectable } from '@angular/core';
 export class AutentificandoService {
 
   constructor() { }
-
+  public permisos(){
+     if(localStorage["rango"] == "1"){
+        return true;
+     }
+     return false;
+  }
 }

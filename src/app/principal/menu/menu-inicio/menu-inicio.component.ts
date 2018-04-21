@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from '../../../servicios/login.service';
+import { AutentificandoService } from '../../../servicios/autentificando.service';
 
 @Component({
   selector: 'app-menu-inicio',
@@ -9,7 +10,7 @@ import { LoginService } from '../../../servicios/login.service';
 export class MenuInicioComponent implements OnInit {
   public selectedIndex = -1;
   public usuario:any;
-  constructor(private loginService:LoginService) { }
+  constructor(private loginService:LoginService,private autentificando:AutentificandoService) { }
 
   ngOnInit() {
      const obj = this.loginService.getUsuario();
@@ -24,4 +25,7 @@ export class MenuInicioComponent implements OnInit {
     document.location.href = "/";
   }
 
+  public permiso(){
+    return this.autentificando.permisos();
+  }
 }

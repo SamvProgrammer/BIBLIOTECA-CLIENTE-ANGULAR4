@@ -14,7 +14,7 @@
                   </a>
                 </li>
 
-                <li  data-toggle="collapse" data-target="#products" class="collapsed " [ngClass]="{'active': selectedIndex == 1}"  (click)="seleccionaIndice(1)">
+                <li *ngIf="permiso()" data-toggle="collapse" data-target="#products" class="collapsed " [ngClass]="{'active': selectedIndex == 1}"  (click)="seleccionaIndice(1)">
                   <a ><i class="fa fa-gift fa-lg"></i> Catálogos <span class="arrow"></span></a>
                 </li>
                 <ul class="sub-menu collapse" id="products" >
@@ -31,8 +31,9 @@
                   <a ><i class="fa fa-book"></i> Libros <span class="arrow"></span></a>
                 </li>  
                 <ul  class="sub-menu collapse"  id="service" >
-                  <li routerLink="/pedidos">Prestamos</li>
-                  <li routerLink="/apartados">Apartados</li>
+                  <li *ngIf="permiso()" routerLink="/pedidos">Autorización de Prestamos</li>
+                  <li *ngIf="!permiso()" routerLink="/apartados">Apartar libros</li>
+                  <li *ngIf="permiso()" routerLink="/historico">Historial de libros</li>
                 </ul>
 
 
